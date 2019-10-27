@@ -60,6 +60,7 @@ class Console{
             print(car)
         }
     }
+    
     private func addCar(){
         print("Please write car name: ",separator: "",terminator: "")
         guard let carName = readLine() else {
@@ -81,13 +82,9 @@ class Console{
         }
         storage.addCar(Car(name:carName, year: carYear,model: carModel))
     }
-
-    private func removeCar(){
-        if(storage.cars.isEmpty){
-          print("List empty")
-            return
-        }
-        print("Please write car index or charactiristic ")
+    
+    private func removeByIndex(){
+        print("Print car numb")
         guard let carCharacteristic = readLine() else{
             return
         }
@@ -96,16 +93,90 @@ class Console{
             let tmpCar: Car=storage.cars[CarIndex-1]
             storage.removeCar(tmpCar)
         }
-        else{
-            let tmpYear: Int = Int(carCharacteristic) ?? -1
-            for i in storage.cars{
-                if (i.model == carCharacteristic || i.name == carCharacteristic || i.year == tmpYear){
-                    storage.removeCar(i)
-                    return
-                }
+        return
+    }
+    
+    private func removeByName(){
+        print("Print car name")
+        guard let carCharacteristic = readLine() else{ return }
+        for i in storage.cars{
+            if i.name == carCharacteristic{
+                storage.removeCar(i)
+                return
             }
-            print("No car with that characteristic")
-            return
+        }
+        print("No car with that name")
+        return
+    }
+    
+    private func removeByYear(){
+        print("Print car year")
+        guard let carCharacteristic = readLine() else{ return }
+        let tmpYear: Int = Int(carCharacteristic) ?? -1
+        for i in storage.cars{
+            if i.year == tmpYear{
+                storage.removeCar(i)
+                return
+            }
+        }
+        print("No car with that year")
+        return
+    }
+    
+    private func removeByModel(){
+        print("Print car model")
+        guard let carCharacteristic = readLine() else{ return }
+        for i in storage.cars{
+            if i.model == carCharacteristic{
+                storage.removeCar(i)
+                return
+            }
+        }
+        print("No car with that model")
+        return
+    }
+    
+    private func removeByChar(){
+        let isWorked = true
+        while isWorked{
+            print("Do you eant chose car by 'name', 'year' or by 'model'?")
+            guard let type = readLine() else { return }
+        switch type {
+            case "name":
+                removeByName()
+                return
+            case "year":
+                removeByYear()
+                return
+            case "model":
+                removeByModel()
+                return
+            default:continue
+            }
         }
     }
+
+    private func removeCar(){
+        if(storage.cars.isEmpty){
+          print("List empty")
+            return
+        }
+        let isWorked = true
+        while isWorked{
+            print("Please write how you want to chose car,if you wont to find by number write 'num' or 'ch' if you want to find by characteristic")
+            guard let task = readLine() else{ return }
+            if task == "num" {
+                removeByIndex()
+                return
+            }
+            else{
+                if task=="ch"{
+                    removeByChar()
+                    return
+                }
+                else { continue }
+            }
+        }
+    }
+    
 }

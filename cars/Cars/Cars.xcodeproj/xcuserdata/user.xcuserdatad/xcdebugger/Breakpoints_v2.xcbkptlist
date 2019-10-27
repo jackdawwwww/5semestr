@@ -6,15 +6,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Console.swift"
-            timestampString = "593850712.602499"
+            timestampString = "593857860.312475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "removeCar()"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Console.swift"
-            timestampString = "593850712.602983"
+            timestampString = "593857860.312939"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "removeCar()"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "removeByName()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
