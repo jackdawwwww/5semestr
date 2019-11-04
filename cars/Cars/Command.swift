@@ -1,10 +1,13 @@
 //
 //  Command.swift
-//  Cars
+//  cars
 //
-//  Created by User on 24/10/2019.
-//  Copyright © 2019 User. All rights reserved.
+//  Created by Gala on 30/10/2019.
+//  Copyright © 2019 Gala. All rights reserved.
 //
+
+import Foundation
+
 enum Commands: String{
     case print = "print"
     case add = "add"
