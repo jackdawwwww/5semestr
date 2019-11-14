@@ -13,6 +13,7 @@
 		CC8FA35E236B0993001EC686 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC8FA35C236B0993001EC686 /* Main.storyboard */; };
 		CC8FA360236B0995001EC686 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC8FA35F236B0995001EC686 /* Assets.xcassets */; };
 		CC8FA363236B0995001EC686 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC8FA361236B0995001EC686 /* LaunchScreen.storyboard */; };
+		CE0E3227237B0ADC00EACE0A /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E3226237B0ADC00EACE0A /* ImageListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CC8FA35F236B0995001EC686 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC8FA362236B0995001EC686 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC8FA364236B0995001EC686 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE0E3226237B0ADC00EACE0A /* ImageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				CC8FA35A236B0993001EC686 /* LoginViewController.swift */,
 				ACA62D0B23743BE3004B0C29 /* ImageViewController.swift */,
 				CC8FA35C236B0993001EC686 /* Main.storyboard */,
+				CE0E3226237B0ADC00EACE0A /* ImageListViewController.swift */,
 				CC8FA35F236B0995001EC686 /* Assets.xcassets */,
 				CC8FA361236B0995001EC686 /* LaunchScreen.storyboard */,
 				CC8FA364236B0995001EC686 /* Info.plist */,
@@ -140,6 +143,7 @@
 			files = (
 				CC8FA35B236B0993001EC686 /* LoginViewController.swift in Sources */,
 				ACA62D0C23743BE3004B0C29 /* ImageViewController.swift in Sources */,
+				CE0E3227237B0ADC00EACE0A /* ImageListViewController.swift in Sources */,
 				CC8FA357236B0993001EC686 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

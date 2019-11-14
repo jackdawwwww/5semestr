@@ -8,25 +8,38 @@
 
 import UIKit
 
+private enum Consts {
+    static let loginFirstName: String = ""
+    static let loginSurName: String = ""
+}
+
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
-	@IBOutlet var nameText: UITextField!
-	@IBOutlet var surnameText: UITextField!
-	@IBOutlet var loginButton: UIButton!
+	@IBOutlet private var nameText: UITextField!
+	@IBOutlet private var surnameText: UITextField!
+	@IBOutlet private var loginButton: UIButton!
     @IBOutlet weak var loginFormView: UIView!
     @IBOutlet weak var loginFormViewYConstraint: NSLayoutConstraint!
     
     var initialLoginFormViewY: CGFloat = 0
-
+ 
     override func viewDidLoad() {
 		super.viewDidLoad()
         
         addTapGestureToHideKeyboard()
         addKeyboardObservers()
-
-		nameText.delegate = self
-		surnameText.delegate = self
+        configureViews()
 	}
+    
+    private func configureViews() {
+        nameText.delegate = self
+        surnameText.delegate = self
+
+        nameText.translatesAutoresizingMaskIntoConstraints = false
+        surnameText.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginFormView.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         initialLoginFormViewY = loginFormViewYConstraint.constant
@@ -44,32 +57,35 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
 	@IBAction func onLoginTapped(_ sender: Any) {
-		guard let name = nameText.text, let surname = surnameText.text else {
-			 return
-		}
-        
-        if name == "Galina" && surname == "Khlimankova" {
+        guard let name = nameText.text, let surname = surnameText.text else {
+            return
+        }
+
+        if name == Consts.loginFirstName, surname == Consts.loginSurName {
             performSegue(withIdentifier: "ShowImage", sender: self)
         } else {
-            let alertController = UIAlertController(
-                title: "ERROR!!!",
-                message: "Your write incorrect name. Please write correct name",
-                preferredStyle: .alert)
-            
-            alertController.addAction(UIAlertAction(
-                title: "Close",
-                style: .default,
-                handler: { _ in
-                alertController.dismiss(animated: true, completion: nil)
-            }))
-            
-            self.present(alertController, animated: true, completion: nil)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
-                alertController.dismiss(animated: true, completion: nil)
-            }
+            showIncorrectNameError()
         }
-	}
+    }
+    private func showIncorrectNameError() {
+        let alertController = UIAlertController(
+            title: "ERROR!!!",
+            message: "Your write incorrect name. Please write correct name",
+            preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(
+            title: "Close",
+            style: .default,
+            handler: { _ in
+                alertController.dismiss(animated: true, completion: nil)
+        }))
+
+        present(alertController, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+           alertController.dismiss(animated: true, completion: nil)
+       }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
@@ -113,18 +129,3 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
 	}
 }
-
-
-//        nameText.translatesAutoresizingMaskIntoConstraints = false
-//        surnameText.translatesAutoresizingMaskIntoConstraints = false
-//        loginButton.translatesAutoresizingMaskIntoConstraints = false
-//          loginFormView.translatesAutoresizingMaskIntoConstraints = false
-//        let safeAreaGuide = view.safeAreaLayoutGuide
-//
-//        NSLayoutConstraint.activate([surnameText.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
-//                           surnameText.centerYAnchor.constraint(equalTo: safeAreaGuide.centerYAnchor),
-//                           loginButton.topAnchor.constraint(equalTo: surnameText.bottomAnchor, constant: 20),
-//                           loginButton.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
-//                           surnameText.topAnchor.constraint(equalTo: nameText.bottomAnchor, constant: 20),
-//                           nameText.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor)])
-//
