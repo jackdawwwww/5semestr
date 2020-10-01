@@ -7,22 +7,17 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    private ExecutorService service = Executors.newFixedThreadPool(10);
-
     public static void main(String[] args) {
-        if(args.length < 1)
-        {
-            System.err.println("Error, has no params");
+        if(args.length < 1) {
+            System.err.println("Has no params");
             return;
         }
 
-
         int serverPort = Integer.parseInt(args[0]);
-        Server s = new Server(serverPort);
+        start(serverPort);
     }
 
-    private Server(int serverPort) {
-
+    private static void start(int serverPort) {
         try(ServerSocket ss = new ServerSocket(serverPort)) {
             System.out.println("Listening " + InetAddress.getLocalHost().getHostAddress() + ":" + ss.getLocalPort());
             System.out.println("|    Address    |     Speed   |Instant Speed|Percents|  File name");
@@ -30,20 +25,15 @@ public class Server {
             while(true) {
                 try {
                     Socket socket = ss.accept();
+                    ExecutorService service = Executors.newFixedThreadPool(10);
                     service.submit(new Session(socket));
-                }
-
-                catch(IOException e) {
+                } catch(IOException e) {
                     System.out.println(e.getMessage());
                 }
-
             }
-        }
-
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
 }

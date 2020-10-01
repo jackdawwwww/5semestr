@@ -6,13 +6,13 @@ import java.nio.charset.StandardCharsets;
 
 public class Client {
     private FileInputStream source;
-    private File f;
+    private File file;
     private DataOutputStream output;
     private DataInputStream input;
 
     public static void main(String[] args) {
         if(args.length < 3) {
-            System.err.println("Error, has no params");
+            System.err.println("Need more params");
             return;
         }
 
@@ -21,53 +21,46 @@ public class Client {
         InetAddress serverAddress;
         try {
             serverAddress = InetAddress.getByName(args[0]);
-        }
-        catch (UnknownHostException e) {
+        } catch (UnknownHostException e) {
             System.err.println(e.getMessage());
             return;
         }
-        String filepath = args[2];
 
-        Client c = new Client(serverAddress, serverPort, filepath);
+        String filepath = args[2];
+        new Client(serverAddress, serverPort, filepath);
     }
 
     private Client(InetAddress serverAddress, int serverPort, String filepath) {
-
-        f = new File(filepath);
+        file = new File(filepath);
         try (Socket socket = new Socket(serverAddress, serverPort);
-             FileInputStream s = new FileInputStream(f)) {
+             FileInputStream s = new FileInputStream(file)) {
             source = s;
 
-            System.out.println("Connected to " + socket.getInetAddress() + ":" + socket.getPort());
+            System.out.println("\nConnected to " + socket.getInetAddress() + ":" + socket.getPort());
 
             output = new DataOutputStream(socket.getOutputStream());
             input = new DataInputStream(socket.getInputStream());
 
+            //Todo: client's uuid
             sendFileName();
             sendFileSize();
             sendFile();
 
             System.out.println(recvFinishMess());
-        }
-        catch (IOException|NullPointerException e) {
+        } catch (IOException|NullPointerException e) {
             System.out.println(e.getMessage());
         }
-
-    }
-
-    private String getFileName() {
-        return f.getName();
     }
 
     private void sendFileName() throws IOException {
-        String fileName = getFileName();
+        String fileName = file.getName();
         byte[] bytes = fileName.getBytes(StandardCharsets.UTF_8);
         output.writeInt(bytes.length);
         output.write(bytes);
     }
 
     private void sendFileSize() throws IOException {
-        output.writeLong(f.length());
+        output.writeLong(file.length());
     }
 
     private void sendFile() throws IOException {
